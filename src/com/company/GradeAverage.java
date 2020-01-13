@@ -12,12 +12,12 @@ package com.company;
 
 public class GradeAverage {
 
-    private int [] scores;
+    private int[] scores;
 
-    public GradeAverage(int [] s)
-    {
+    public GradeAverage(int[] s) {
         scores = s;
     }
+
     // returns the mean (average) of the values in the scores array
     // whose indexes are between first and last (including first and last).
     //You may assume that first and last are > 0 and < scores.length
@@ -31,17 +31,14 @@ public class GradeAverage {
     }
 
 
-
     // returns true if each successive value in scores is greater than
     // or equal to the previous value.  Otherwise returns false
     private boolean showsImprovement() {
         for (int a = 0; a < scores.length; a++) {
-            if (scores[a] >= scores[a + 1]) {
+            if (scores[a] < scores[a + 1]) {
                 return true;
             } else {
-                if (scores[a] < scores[a + 1]) {
-                    return false;
-                }
+                return false;
             }
         }
     }
@@ -50,11 +47,25 @@ public class GradeAverage {
     // if the values in the scores array show improvement, returns the
     // average of the elements in scores with indexes greater than or
     // equal to scores.length()/2
-    public double finalGrade()
-    {
-        //TODO add code here
-        return 0.0;
-    }
+    public double finalGrade() {
+            double f = 0;
+            int d = scores.length;
+            int b = 0;
+            for (int a = 0; a < d; a++) {
+                b = b + scores[a];
+                if (scores[a] > scores[a + 1]) {
+                    f = b + d / 2;
+                    return f;
+                } else {
+                    if (scores[a] < scores[a + 1]) {
+                        f = b++ / d;
+                        return f;
+                    }
+                }
+            }
+        }
+
+
     public static void main(String[] args) {
         int [] s1 = {50,50,20,80,53};   // not improved, finalGrade is 50.6
         int [] s2 = {20,50,50,53,80};   // improved, final grade is 61.0
@@ -65,13 +76,13 @@ public class GradeAverage {
         System.out.println(sr1.showsImprovement());
         System.out.println(sr1.finalGrade());
         GradeAverage sr2 = new GradeAverage(s2);
-       // System.out.println(sr2.mean());
+        //System.out.println(sr2.mean());
         System.out.println(sr2.showsImprovement());
         System.out.println(sr2.finalGrade());
        // System.out.println(sr3.mean());
         //System.out.println(sr3.showsImprovement());
         GradeAverage sr3 = new GradeAverage(s3);
-        System.out.println(sr3.finalGrade());
+       // System.out.println(sr3.finalGrade());
     }
 
 }
